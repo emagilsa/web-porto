@@ -133,15 +133,15 @@
     position:relative; z-index:2; width:min(360px, 82%); margin:0 auto;
   }
   .hero-photo-wrap img{
-    width:100%; aspect-ratio:1/1.05; object-fit:cover; border-radius:24px;
+    width:100%; aspect-ratio:1/1.05; object-fit:cover; object-position:center 12%; border-radius:24px;
     box-shadow: var(--shadow);
   }
   .code-card{
-    position:absolute; z-index:3; right:-8px; bottom:22px; width:230px;
+    position:absolute; z-index:3; right:-10px; bottom:-56px; width:230px;
     background:#0F172A; color:#E2E8F0; border-radius:12px; padding:16px 16px 14px 16px;
     box-shadow: var(--shadow); font-family:var(--mono); font-size:11px; line-height:1.7;
   }
-  @media (max-width:520px){ .code-card{ width:190px; right:-4px; font-size:10px; } }
+  @media (max-width:520px){ .code-card{ width:190px; right:-4px; bottom:-72px; font-size:10px; } }
   .code-card .dots{ display:flex; gap:5px; margin-bottom:10px; }
   .code-card .dots span{ width:8px; height:8px; border-radius:50%; }
   .code-card .dots span:nth-child(1){ background:#F87171; }
