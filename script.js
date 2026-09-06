@@ -34,12 +34,11 @@ document.getElementById('year').textContent = new Date().getFullYear();
     });
   }
 
-  // ---------- Constellation / connectivity graph background ----------
+  // ---------- Constellation / connectivity graph background (full page) ----------
   (function initConstellation(){
     const canvas = document.getElementById('constellation');
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
-    const heroSection = canvas.closest('.hero');
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     let width = 0, height = 0, dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -48,12 +47,11 @@ document.getElementById('year').textContent = new Date().getFullYear();
 
     const NODE_COLOR = '37, 99, 235';   // matches --blue
     const LINK_DIST = 130;              // max distance to draw a connecting line
-    const DENSITY = 9000;               // lower = more nodes per area
+    const DENSITY = 11000;              // lower = more nodes per area
 
     function resize(){
-      const rect = heroSection.getBoundingClientRect();
-      width = rect.width;
-      height = rect.height;
+      width = window.innerWidth;
+      height = window.innerHeight;
       canvas.width = Math.round(width * dpr);
       canvas.height = Math.round(height * dpr);
       canvas.style.width = width + 'px';
@@ -63,12 +61,12 @@ document.getElementById('year').textContent = new Date().getFullYear();
     }
 
     function createNodes(){
-      const count = Math.max(18, Math.min(70, Math.round((width * height) / DENSITY)));
+      const count = Math.max(24, Math.min(90, Math.round((width * height) / DENSITY)));
       nodes = new Array(count).fill(0).map(() => ({
         x: Math.random() * width,
         y: Math.random() * height,
-        vx: (Math.random() - 0.5) * 0.35,
-        vy: (Math.random() - 0.5) * 0.35,
+        vx: (Math.random() - 0.5) * 0.3,
+        vy: (Math.random() - 0.5) * 0.3,
         r: Math.random() * 1.6 + 1.2
       }));
     }
@@ -93,7 +91,7 @@ document.getElementById('year').textContent = new Date().getFullYear();
           const dx = a.x - b.x, dy = a.y - b.y;
           const dist = Math.sqrt(dx * dx + dy * dy);
           if (dist < LINK_DIST){
-            const alpha = (1 - dist / LINK_DIST) * 0.18;
+            const alpha = (1 - dist / LINK_DIST) * 0.13;
             ctx.strokeStyle = `rgba(${NODE_COLOR}, ${alpha})`;
             ctx.lineWidth = 1;
             ctx.beginPath();
@@ -108,7 +106,7 @@ document.getElementById('year').textContent = new Date().getFullYear();
       for (const n of nodes){
         ctx.beginPath();
         ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(${NODE_COLOR}, 0.45)`;
+        ctx.fillStyle = `rgba(${NODE_COLOR}, 0.35)`;
         ctx.fill();
       }
 
